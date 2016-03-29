@@ -71,6 +71,11 @@ public class KCFloatingActionButton: UIView {
     @IBInspectable public var buttonImage: UIImage? = nil
     
     /**
+        Inset for the button image, to better control its size.
+     */
+    @IBInspectable public var buttonImageInset : CGFloat = 0
+    
+    /**
         Plus icon color inside button.
     */
     @IBInspectable public var plusColor: UIColor = UIColor(white: 0.2, alpha: 1)
@@ -448,12 +453,15 @@ public class KCFloatingActionButton: UIView {
     private func setButtonImage() {
         buttonImageView.removeFromSuperview()
         buttonImageView = UIImageView(image: buttonImage)
-		buttonImageView.tintColor = plusColor
-        buttonImageView.frame = CGRectMake(
-            size/2 - buttonImageView.frame.size.width/2,
-            size/2 - buttonImageView.frame.size.height/2,
-            buttonImageView.frame.size.width,
-            buttonImageView.frame.size.height
+        buttonImageView.contentMode = .ScaleAspectFit
+        buttonImageView.frame = CGRectMake(0,
+                                           0,
+                                           size - buttonImageInset,
+                                           size - buttonImageInset)
+        buttonImageView.tintColor = plusColor
+        buttonImageView.frame = CGRectOffset(buttonImageView.frame,
+                                             size/2 - buttonImageView.frame.size.width/2,
+                                             size/2 - buttonImageView.frame.size.height/2
         )
         addSubview(buttonImageView)
     }
