@@ -68,7 +68,11 @@ public class KCFloatingActionButton: UIView {
     /**
         Button image.
     */
-    @IBInspectable public var buttonImage: UIImage? = nil
+    @IBInspectable public var buttonImage: UIImage? = nil {
+        didSet {
+            self.setButtonImage()
+        }
+    }
     
     /**
         Inset for the button image, to better control its size.
